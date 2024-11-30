@@ -57,3 +57,6 @@ group :test do
 end
 
 gem "bcrypt", "~> 3.1"
+
+gem 'rails-ujs'
+gem 'turbolinks', '~> 5'

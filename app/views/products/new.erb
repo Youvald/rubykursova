@@ -1,0 +1,27 @@
+<h1>Додати новий товар</h1>
+
+<%= form_with model: @product, local: true do |form| %>
+  <div>
+    <%= form.label :name, "Назва товару" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Опис товару" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :price, "Ціна (₴)" %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :stock, "Кількість на складі" %>
+    <%= form.number_field :stock %>
+  </div>
+
+  <div>
+    <%= form.submit "Створити товар" %>
+  </div>
+<% end %>

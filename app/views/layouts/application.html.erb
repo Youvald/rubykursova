@@ -4,13 +4,14 @@
   <title>Confectionery Shop</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
 </head>
 
 <body>
 <nav>
   <% if logged_in? %>
     Вітаємо, <%= current_user.email %>!
-    <%= link_to 'Вийти', session_path(current_user), method: :delete %>
+    <%= link_to "Вийти", logout_path, method: :delete, data: { confirm: "Ви впевнені, що хочете вийти?" } %>
   <% else %>
     <%= link_to 'Реєстрація', new_user_path %> |
     <%= link_to 'Вхід', new_session_path %>

@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
-  get "products/index"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
-  get "users/new"
-  get "users/create"
-  root 'products#index' # Головна сторінка (зробимо пізніше)
+  # Головна сторінка магазину
+  root 'products#index'
+
+  # Ресурси для товарів
+  resources :products
 
   # Реєстрація користувачів
   resources :users, only: [:new, :create]
 
   # Сесії для входу/виходу
-  resources :sessions, only: [:new, :create, :destroy]
+  get '/login', to: 'sessions#new', as: 'new_session'
+  post '/login', to: 'sessions#create', as: 'sessions'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  namespace :admin do
+    resources :products
+    # Додайте інші ресурси, якщо потрібно
+  end
+
 end
