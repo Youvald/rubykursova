@@ -1,0 +1,8 @@
+<h1><%= @product.name %></h1>
+<p>Ціна: <%= number_to_currency(@product.price) %></p>
+<p>Опис: <%= @product.description %></p>
+<%= form_with url: add_item_cart_path, method: :post do |f| %>
+  <%= hidden_field_tag :product_id, @product.id %>
+  <%= number_field_tag :quantity, 1, min: 1 %>
+  <%= submit_tag 'Додати до корзини' %>
+<% end %>

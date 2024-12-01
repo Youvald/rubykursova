@@ -9,8 +9,12 @@
 
 <body>
 <nav>
+  <% if current_user&.admin? %>
+    <%= link_to 'Адмін-панель', admin_products_path %>
+  <% end %>
+
   <% if logged_in? %>
-    Вітаємо, <%= current_user.email %>!
+    Привіт, <%= current_user.email %>!
     <%= link_to "Вийти", logout_path, method: :delete, data: { confirm: "Ви впевнені, що хочете вийти?" } %>
   <% else %>
     <%= link_to 'Реєстрація', new_user_path %> |

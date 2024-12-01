@@ -1,0 +1,24 @@
+<h1>Адмін панель: Управління товарами</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Назва</th>
+    <th>Ціна</th>
+    <th>Дії</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td><%= number_to_currency(product.price) %></td>
+      <td>
+        <%= link_to 'Редагувати', edit_admin_product_path(product) %> |
+        <%= link_to 'Видалити', admin_product_path(product), method: :delete, data: { confirm: 'Ви впевнені?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

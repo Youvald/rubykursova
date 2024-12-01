@@ -1,0 +1,31 @@
+<h1>Корзина</h1>
+
+<% if @cart_items.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Товар</th>
+      <th>Кількість</th>
+      <th>Ціна</th>
+      <th>Загалом</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @cart_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.product.price) %></td>
+        <td><%= number_to_currency(item.product.price * item.quantity) %></td>
+        <td>
+          <%= link_to 'Видалити', remove_item_cart_path(item), method: :delete, data: { confirm: 'Ви впевнені?' } %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <h3>Загальна сума: <%= number_to_currency(@cart_items.sum { |item| item.product.price * item.quantity }) %></h3>
+<% else %>
+  <p>Корзина порожня.</p>
+<% end %>

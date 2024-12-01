@@ -1,14 +1,15 @@
-<h1>Наші товари</h1>
-<ul>
-  <% @products.each do |product| %>
-    <li>
-      <h2><%= product.name %></h2>
-      <p><%= product.description %></p>
-      <p>Ціна: <%= number_to_currency(product.price, unit: "₴") %></p>
-      <p>В наявності: <%= product.stock %> шт.</p>
-    </li>
-  <% end %>
-</ul>
-<% if current_user&.admin? %>
-  <%= link_to 'Додати товар', new_product_path %>
+<h1>Список товарів</h1>
+
+<% @products.each do |product| %>
+  <div class="product">
+    <h2><%= link_to product.name, product_path(product) %></h2>
+    <p>Ціна: <%= number_to_currency(product.price) %></p>
+
+    <%= form_with url: add_item_carts_path, method: :post do |f| %>
+      <%= hidden_field_tag :product_id, product.id %>
+      <%= number_field_tag :quantity, 1, min: 1 %>
+      <%= submit_tag 'Додати до корзини' %>
+    <% end %>
+
+  </div>
 <% end %>

@@ -17,5 +17,12 @@ Rails.application.routes.draw do
     resources :products
     # Додайте інші ресурси, якщо потрібно
   end
+  resources :carts, only: [:show] do
+    post 'add_item', on: :collection
+  end
+
+  resources :products, only: [:index, :show]
+
+
 
 end
